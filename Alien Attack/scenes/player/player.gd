@@ -1,10 +1,15 @@
 extends CharacterBody2D
 
+
+
 @export var movement_speed: float = 2000.0
 @export var rotation_speed: float = 50.0
 
 var _screen_size
-
+var can_shoot = true 
+var cnt = 0 
+@onready var shoot_timer: Timer = $ShootTimer
+@onready var shoot_marker: Marker2D = $Marker2D
 func _ready():
 	_screen_size = get_viewport_rect().size
 
@@ -15,7 +20,13 @@ func _process(delta: float) -> void:
 	elif(Input.is_action_pressed("rotate_right")):
 		rotation_degrees += rotation_speed * delta
 	#endregion
-		
+	
+	#region Character Shooting
+	if(Input.is_action_just_pressed("shoot") and can_shoot):
+		ObjectMaker.create_player_bullet(rotation, shoot_marker.global_position)
+		can_shoot = false
+		shoot_timer.start()
+	#endregion
 	
 func _physics_process(delta: float) -> void:
 	#region Character Movement
@@ -37,3 +48,6 @@ func _physics_process(delta: float) -> void:
 func reset_movement():
 	velocity.y = 0 
 	velocity.x = 0 
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true

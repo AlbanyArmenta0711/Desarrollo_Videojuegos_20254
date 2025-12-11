@@ -20,6 +20,8 @@ texture = ExtResource("2_dovo2")
 shape = SubResource("CapsuleShape2D_gmlin")
 
 [node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [node name="HitBox" type="Area2D" parent="."]
 position = Vector2(-2, 0)
@@ -28,3 +30,8 @@ position = Vector2(-2, 0)
 position = Vector2(1, 6)
 shape = SubResource("CircleShape2D_dovo2")
 debug_color = Color(0.881845, 0.0003482741, 0.8194417, 0.41960785)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -22)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
