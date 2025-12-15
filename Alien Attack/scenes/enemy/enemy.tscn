@@ -32,8 +32,11 @@ shape = SubResource("RectangleShape2D_40wdo")
 debug_color = Color(0.8927195, 0.1473386, 0.7044298, 0.41960785)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(22, 0)
+position = Vector2(9, 0)
 
 [node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_damage_received"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

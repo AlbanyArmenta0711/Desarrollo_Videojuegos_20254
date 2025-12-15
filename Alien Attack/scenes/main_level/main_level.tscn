@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmnukwlmo7gp2"]
+[gd_scene load_steps=5 format=3 uid="uid://dmnukwlmo7gp2"]
 
 [ext_resource type="PackedScene" uid="uid://fmm8khn2rpi5" path="res://scenes/player/player.tscn" id="1_8e00y"]
 [ext_resource type="Texture2D" uid="uid://ck6m4tdo0sejc" path="res://assets/backgrounds/space.jpg" id="1_rqn6l"]
 [ext_resource type="PackedScene" uid="uid://dr6cgr8s2eri0" path="res://scenes/enemy/enemy.tscn" id="3_48npw"]
+[ext_resource type="PackedScene" uid="uid://2gsn2b74okbm" path="res://scenes/HUD/hud.tscn" id="4_6gy0k"]
 
 [node name="main_level" type="Node2D"]
 
@@ -16,4 +17,15 @@ stretch_mode = 3
 position = Vector2(641, 316)
 
 [node name="Enemy" parent="." instance=ExtResource("3_48npw")]
-position = Vector2(487, 252)
+position = Vector2(395, 266)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_48npw")]
+position = Vector2(498, 467)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_48npw")]
+position = Vector2(862, 325)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_48npw")]
+position = Vector2(622, 135)
+
+[node name="Hud" parent="." instance=ExtResource("4_6gy0k")]
