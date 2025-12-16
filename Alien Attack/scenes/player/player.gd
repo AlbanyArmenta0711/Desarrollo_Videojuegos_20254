@@ -51,3 +51,6 @@ func reset_movement():
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	SignalManager.on_player_defeated.emit()

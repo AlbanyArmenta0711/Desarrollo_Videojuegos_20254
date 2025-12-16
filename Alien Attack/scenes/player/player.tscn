@@ -25,6 +25,7 @@ one_shot = true
 
 [node name="HitBox" type="Area2D" parent="."]
 position = Vector2(-2, 0)
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(1, 6)
@@ -35,3 +36,4 @@ debug_color = Color(0.881845, 0.0003482741, 0.8194417, 0.41960785)
 position = Vector2(0, -22)
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

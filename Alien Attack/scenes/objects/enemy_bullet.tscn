@@ -7,6 +7,7 @@
 radius = 4.0
 
 [node name="EnemyBullet" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_ebqjs")
 
 [node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
