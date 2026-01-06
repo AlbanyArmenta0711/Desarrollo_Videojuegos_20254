@@ -42,8 +42,3 @@ position = Vector2(463, 479)
 position = Vector2(568, 542)
 
 [node name="Hud" parent="." instance=ExtResource("3_vxsof")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1

@@ -1,7 +1,7 @@
-extends MarginContainer
+extends CanvasLayer
 
-@onready var heart_container = $HBoxContainer/HeartContainer
-@onready var score_label = $HBoxContainer/ScoreLabel
+@onready var heart_container = $MC/HBoxContainer/HeartContainer
+@onready var score_label = $MC/HBoxContainer/ScoreLabel
 
 const DEFAULT_SCORE_TEXT = "Score: "
 var heart_array: Array

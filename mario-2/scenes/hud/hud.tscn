@@ -8,7 +8,10 @@
 font = ExtResource("2_c45xl")
 font_size = 32
 
-[node name="Hud" type="MarginContainer"]
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_c45xl")
+
+[node name="MC" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,29 +20,30 @@ grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-script = ExtResource("1_c45xl")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="MC"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="HeartContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="HeartContainer" type="HBoxContainer" parent="MC/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="H1" type="TextureRect" parent="HBoxContainer/HeartContainer"]
+[node name="H1" type="TextureRect" parent="MC/HBoxContainer/HeartContainer"]
 layout_mode = 2
 texture = ExtResource("1_cgeww")
 
-[node name="H2" type="TextureRect" parent="HBoxContainer/HeartContainer"]
+[node name="H2" type="TextureRect" parent="MC/HBoxContainer/HeartContainer"]
 layout_mode = 2
 texture = ExtResource("1_cgeww")
 
-[node name="H3" type="TextureRect" parent="HBoxContainer/HeartContainer"]
+[node name="H3" type="TextureRect" parent="MC/HBoxContainer/HeartContainer"]
 layout_mode = 2
 texture = ExtResource("1_cgeww")
 
-[node name="ScoreLabel" type="Label" parent="HBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="MC/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_0bx4p")
