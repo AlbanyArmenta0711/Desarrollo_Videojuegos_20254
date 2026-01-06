@@ -5,22 +5,26 @@ const MOVEMENT_SPEED: float = 160.0
 const JUMP_SPEED: float = -450.0
 const GRAVITY: float = 1000.0
 const MAX_FALL_SPEED: float = GRAVITY * 3
+const HURT_JUMP_SPEED: float = -100.0
 
 var current_state: PLAYER_STATES = PLAYER_STATES.IDLE
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var audio_player: AudioStreamPlayer2D = $AudioPlayer
+@onready var invincible_timer: Timer = $InvincibleTimer
 
 func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
-	else:
-		velocity.y = 0
-	velocity.y = clampf(velocity.y, JUMP_SPEED, MAX_FALL_SPEED)
-	get_input(delta)
-	calculate_state()
+	if current_state != PLAYER_STATES.HURT: 
+		if not is_on_floor():
+			velocity.y += GRAVITY * delta
+		else:
+			velocity.y = 0
+		velocity.y = clampf(velocity.y, JUMP_SPEED, MAX_FALL_SPEED)
+		get_input(delta)
+		calculate_state()
 	move_and_slide()
 	
 func get_input(delta: float):
@@ -53,6 +57,8 @@ func calculate_state():
 
 func set_state(new_state: PLAYER_STATES):
 	if(current_state != new_state):
+		if current_state == PLAYER_STATES.FALL and (new_state == PLAYER_STATES.IDLE or new_state == PLAYER_STATES.RUN):
+			SoundsManager.play_sound(audio_player, SoundsManager.PLAYER_SOUND_LAND)
 		current_state = new_state 
 		match current_state:
 			PLAYER_STATES.IDLE: 
@@ -63,12 +69,28 @@ func set_state(new_state: PLAYER_STATES):
 				print("Corriendo")
 			PLAYER_STATES.JUMP:
 				anim_player.play("jump")
+				SoundsManager.play_sound(audio_player, SoundsManager.PLAYER_SOUND_JUMP)
 				print("Salto")
 			PLAYER_STATES.FALL:
 				anim_player.play("fall")
 				print("Cayendo")
+			PLAYER_STATES.HURT:
+				anim_player.play("hurt")
+				SoundsManager.play_sound(audio_player, SoundsManager.PLAYER_SOUND_HURT)
+				print("Con dano")
 	else:
 		return
 	
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	apply_hit()
 	
-	
+func apply_hit(): 
+	velocity.x = 0 
+	velocity.y = HURT_JUMP_SPEED
+	set_state(PLAYER_STATES.HURT)
+	invincible_timer.start()
+
+func _on_invincible_timeout() -> void:
+	print("Controlr ecuperado")
+	set_state(PLAYER_STATES.IDLE)
+	velocity.y = 0
