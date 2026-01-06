@@ -12,6 +12,7 @@ var current_state: PLAYER_STATES = PLAYER_STATES.IDLE
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var audio_player: AudioStreamPlayer2D = $AudioPlayer
 @onready var invincible_timer: Timer = $InvincibleTimer
+@onready var jump_hitbox_collision = $JumpHitbox/CollisionShape2D
 
 func _ready() -> void:
 	pass
@@ -59,6 +60,7 @@ func set_state(new_state: PLAYER_STATES):
 	if(current_state != new_state):
 		if current_state == PLAYER_STATES.FALL and (new_state == PLAYER_STATES.IDLE or new_state == PLAYER_STATES.RUN):
 			SoundsManager.play_sound(audio_player, SoundsManager.PLAYER_SOUND_LAND)
+			jump_hitbox_collision.disabled = true
 		current_state = new_state 
 		match current_state:
 			PLAYER_STATES.IDLE: 
@@ -73,6 +75,7 @@ func set_state(new_state: PLAYER_STATES):
 				print("Salto")
 			PLAYER_STATES.FALL:
 				anim_player.play("fall")
+				jump_hitbox_collision.disabled = false
 				print("Cayendo")
 			PLAYER_STATES.HURT:
 				anim_player.play("hurt")
@@ -89,6 +92,13 @@ func apply_hit():
 	velocity.y = HURT_JUMP_SPEED
 	set_state(PLAYER_STATES.HURT)
 	invincible_timer.start()
+	var tween = get_tree().create_tween()
+	tween.set_loops(1)
+	tween.tween_property(sprite, "self_modulate",Color(1,0,0,0.5),0.5)
+	tween.tween_property(sprite, "self_modulate",Color(1,1,1,1),0.5)
+
+
+
 
 func _on_invincible_timeout() -> void:
 	print("Controlr ecuperado")

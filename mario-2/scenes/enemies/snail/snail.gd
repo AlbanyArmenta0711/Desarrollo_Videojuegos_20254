@@ -38,12 +38,5 @@ func flip_snail():
 	anim_sprite.flip_h = !anim_sprite.flip_h
 	
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	queue_free()

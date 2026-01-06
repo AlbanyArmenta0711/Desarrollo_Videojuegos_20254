@@ -153,10 +153,13 @@ debug_color = Color(0.9098039, 0.10980392, 0.6784314, 0.22352941)
 one_shot = true
 
 [node name="JumpHitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpHitbox"]
 position = Vector2(-1.5, 14)
 shape = SubResource("RectangleShape2D_p47bc")
+disabled = true
 debug_color = Color(0.69411767, 0.49411765, 0, 0.19215687)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
