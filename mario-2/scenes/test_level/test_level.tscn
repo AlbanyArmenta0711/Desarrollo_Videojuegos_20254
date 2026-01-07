@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnyrmc76fueor"]
+[gd_scene load_steps=10 format=3 uid="uid://bnyrmc76fueor"]
 
 [ext_resource type="PackedScene" uid="uid://27m58xn3rwh3" path="res://scenes/player/player.tscn" id="1_alwyk"]
 [ext_resource type="PackedScene" uid="uid://k8n06vjidsi5" path="res://scenes/enemies/snail/snail.tscn" id="2_62xr1"]
 [ext_resource type="PackedScene" uid="uid://cebi34elwpbud" path="res://scenes/hud/hud.tscn" id="3_vxsof"]
 [ext_resource type="PackedScene" uid="uid://i4ywmfo8msj8" path="res://scenes/player_camera/player_camera.tscn" id="4_yetkn"]
 [ext_resource type="PackedScene" uid="uid://b0v0g3xfmom2n" path="res://scenes/backgrounds/world1_1/background1_1.tscn" id="5_q0l7r"]
+[ext_resource type="PackedScene" uid="uid://imliqey1ua0y" path="res://scenes/fruit/fruit.tscn" id="6_q2iya"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_alwyk"]
 
@@ -50,3 +51,12 @@ position = Vector2(568, 542)
 
 [node name="PlayerCamera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_yetkn")]
 player = NodePath("../Player")
+
+[node name="Fruit" parent="." instance=ExtResource("6_q2iya")]
+position = Vector2(271, 574)
+
+[node name="Fruit2" parent="." instance=ExtResource("6_q2iya")]
+position = Vector2(445, 567)
+
+[node name="Fruit3" parent="." instance=ExtResource("6_q2iya")]
+position = Vector2(656, 569)
