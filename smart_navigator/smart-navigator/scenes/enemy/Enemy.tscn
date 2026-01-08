@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://d13d1sdovjr3c"]
+
+[ext_resource type="Texture2D" uid="uid://b5fxmwcgoos8o" path="res://assets/character/Basic Charakter Spritesheet.png" id="1_sjakr"]
+[ext_resource type="Script" uid="uid://n1i8jv00k5na" path="res://scenes/enemy/enemy.gd" id="1_vwhkw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwhkw"]
+size = Vector2(8, 12)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_vwhkw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sjakr")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_vwhkw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+
+[node name="WaitTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
